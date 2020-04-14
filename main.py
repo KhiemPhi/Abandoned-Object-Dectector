@@ -102,7 +102,7 @@ def main():
 				print(str(frame_past) + " " + str(frame_number))
 				cv2.imwrite(os.path.join(diff_dir, frm_file), diff)
 				results = np.hstack((frame_t, bkg, bkg_t_minus_n, diff))
-				cv2.imwrite(os.path.join(detected_dir, frm_file), frame_t)
+				cv2.imwrite(os.path.join(detected_dir, frm_file), results)
 
 			
 			fgmask_rgb = np.hstack((frame_t, fgmask_rgb, bkg,  diff))
