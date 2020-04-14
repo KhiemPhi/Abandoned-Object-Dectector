@@ -23,11 +23,11 @@ def findConnectedComponents(frame, components_area_lower, components_area_upper)
 	return connected_components_labels, connected_components_stats, num_connected_components
 
 def main():
-	diff_dir = '../data/diff/video9/'
-	frm_dir = '../data/frames/video9/'
-	sub_dir = '../data/subtract/video9/'
-	bg_dir = '../data/bg/video9/'    
-	detected_dir = '../data/detected/video9	'
+	diff_dir = '../data/diff/video5/'
+	frm_dir = '../data/frames/video5/'
+	sub_dir = '../data/subtract/video5/'
+	bg_dir = '../data/bg/video5/'    
+	detected_dir = '../data/detected/video5'
 	
 
 	frm_files = sorted(fnmatch.filter(os.listdir(frm_dir), '*.jpg'))
@@ -48,8 +48,7 @@ def main():
 	components_area_lower = 10
 	components_area_upper = 200
 	total_frames = len(frm_files[1:])
-	print(total_frames)
-
+	
     
 
 	for frm_file in frm_files[1:]:
@@ -102,6 +101,7 @@ def main():
 				drawBoundingBoxes(connected_components_labels_diff, connected_components_stats_diff, frame_t)
 				print(str(frame_past) + " " + str(frame_number))
 				cv2.imwrite(os.path.join(diff_dir, frm_file), diff)
+				results = np.hstack((frame_t, bkg, bkg_t_minus_n, diff))
 				cv2.imwrite(os.path.join(detected_dir, frm_file), frame_t)
 
 			
