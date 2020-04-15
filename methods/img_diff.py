@@ -28,8 +28,8 @@ def findConnectedComponents(frame, components_area_lower, components_area_upper)
 
 def main():
      
-	bg_1 = '../data/bg/video7/frm_00003.jpg'
-	bg_2 = '../data/bg/video7/frm_03206.jpg'
+	bg_1 = '../data/bg/ABODA/video7/frm_00681.jpg'
+	bg_2 = '../data/bg/ABODA/video7/frm_04004.jpg'
 	frame_t = '../data/frames/video7/frm_03206.jpg'
 	
 
@@ -39,21 +39,22 @@ def main():
           bg1 = cv2.imread(bg_1)
           bg2 = cv2.imread(bg_2)          
           frame = cv2.imread(frame_t)
-          bg1 = cv2.cvtColor(bg1, cv2.COLOR_RGB2GRAY)
-          bg2 = cv2.cvtColor(bg2, cv2.COLOR_RGB2GRAY)
-          diff = cv2.absdiff(bg1, bg2)
-          diff_canny = cv2.Canny(diff, 10, 100)
-          #diff_gray = cv2.cvtColor(diff, cv2.COLOR_BGR2GRAY)
-          labels, stats, num = findConnectedComponents(diff_canny, 10, 200)
-          bg1 = cv2.cvtColor(bg1, cv2.COLOR_GRAY2RGB)
-          bg2 = cv2.cvtColor(bg2, cv2.COLOR_GRAY2RGB)
-          diff = cv2.cvtColor(diff, cv2.COLOR_GRAY2RGB)	
-          drawBoundingBoxes(labels,stats, frame)
-          diff_canny = cv2.cvtColor(diff_canny, cv2.COLOR_GRAY2RGB)
-          stack = np.hstack((frame, diff_canny, diff, bg1, bg2))
+          
+          
 
 
-          cv2.imshow('frame', stack) 
+          canny1 = cv2.Canny(bg1, 10, 200)
+          canny2 = cv2.Canny(bg2, 10, 200)
+          diff_canny = cv2.absdiff(canny2, canny1)
+          
+          
+
+
+
+         
+
+
+          cv2.imshow('frame', diff_canny) 
           #cv2.imshow('diff', diff_canny) 
           k = cv2.waitKey(1)
           if k == ord('q'):
